@@ -1,0 +1,29 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Listing roasteries</h1>
+<p> Number of roasteries: <%= @roasteries.count %> </p>
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Year</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @roasteries.each do |roastery| %>
+      <tr>
+        <td><%= link_to roastery.name, roastery %></td>
+        <td><%= roastery.year %></td>
+        <td><%= link_to 'Edit', edit_roastery_path(roastery) %></td>
+        <td><%= link_to 'Destroy', roastery, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Roastery', new_roastery_path %>
+<%= link_to 'list of coffees', coffees_path %>

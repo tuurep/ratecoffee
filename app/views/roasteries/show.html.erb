@@ -1,0 +1,21 @@
+<p id="notice"><%= notice %></p>
+
+<h2>
+  <strong>Name:</strong>
+  <%= @roastery.name %>
+</h2>
+
+<p>
+  <i>Established in <%= @roastery.year %></i>
+</p>
+
+<p> Number of coffees: <%= @roastery.coffees.count %> </p>
+
+<p>
+ <% @roastery.coffees.each do |coffee| %>
+   <%= link_to coffee.name, coffee %>
+ <% end %>
+</p>
+
+<%= link_to 'Edit', edit_roastery_path(@roastery) %> |
+<%= link_to 'Back', roasteries_path %>
