@@ -2,3 +2,5 @@
 
 Small coffee-related app,
 for learning Ruby on Rails.
+
+Link to app[https://ratecoffee.herokuapp.com/roasteries]
