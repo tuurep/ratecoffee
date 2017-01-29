@@ -15,6 +15,8 @@ class CoffeesController < ApplicationController
   # GET /coffees/new
   def new
     @coffee = Coffee.new
+    @roasteries = Roastery.all
+    @styles = ["Extra light", "Light", "Medium", "Dark", "Extra dark"]
   end
 
   # GET /coffees/1/edit
@@ -35,6 +37,8 @@ class CoffeesController < ApplicationController
         format.json { render json: @coffee.errors, status: :unprocessable_entity }
       end
     end
+
+    redirect_to coffees_path
   end
 
   # PATCH/PUT /coffees/1

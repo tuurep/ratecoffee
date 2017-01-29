@@ -16,6 +16,10 @@
    <%= link_to coffee.name, coffee %>
  <% end %>
 </p>
-
+<% if @roastery.ratings.empty? %>
+  <p>Roastery has no rated coffees</p>
+<% else %>
+  <p> Has <%= pluralize(@roastery.ratings.count, 'rating') %>, average <%= @roastery.average_rating %></p>
+<% end %>
 <%= link_to 'Edit', edit_roastery_path(@roastery) %> |
 <%= link_to 'Back', roasteries_path %>

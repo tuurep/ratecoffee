@@ -12,8 +12,12 @@
 
 <p>
   <strong>Roastery:</strong>
-  <%= @coffee.roastery_id %>
+  <%= @coffee.roastery.name %>
 </p>
-
+<% if @coffee.ratings.empty? %>
+  <p>Coffee has not yet been rated</p>
+<% else %>
+  <p> Has <%= pluralize(@coffee.ratings.count, 'rating') %>, average <%= @coffee.average_rating %></p>
+<% end %>
 <%= link_to 'Edit', edit_coffee_path(@coffee) %> |
 <%= link_to 'Back', coffees_path %>

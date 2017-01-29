@@ -1,0 +1,100 @@
+r = Roasteries.create name:"RoastDog" year:2007
+                                          ^
+[5] pry(main)> r = Roasteries.create name:"RoastDog", year:2007
+NameError: uninitialized constant Roasteries
+from (pry):5:in `__pry__'
+[6] pry(main)> Roasteries.create name:"RoastDog", year:2007
+NameError: uninitialized constant Roasteries
+from (pry):6:in `__pry__'
+[7] pry(main)> r = Roastery.create name:"RoastDog", year:2007
+   (0.1ms)  begin transaction
+  SQL (0.2ms)  INSERT INTO "roasteries" ("name", "year", "created_at", "updated_at") VALUES (?, ?, ?, ?)  [["name", "RoastDog"], ["year", 2007], ["created_at", "2017-01-25 16:53:40.749304"], ["updated_at", "2017-01-25 16:53:40.749304"]]
+   (19.0ms)  commit transaction
+=> #<Roastery:0x0055e27cfaf3e8
+ id: 4,
+ name: "RoastDog",
+ year: 2007,
+ created_at: Wed, 25 Jan 2017 16:53:40 UTC +00:00,
+ updated_at: Wed, 25 Jan 2017 16:53:40 UTC +00:00>
+[8] pry(main)> c.coffees.first
+NoMethodError: undefined method `coffees' for #<Coffee:0x0055e27e687a98>
+from /home/tupitupi/.rbenv/versions/2.3.1/lib/ruby/gems/2.3.0/gems/activemodel-4.2.7/lib/active_model/attribute_methods.rb:433:in `method_missing'
+[9] pry(main)> c.first
+NoMethodError: undefined method `first' for #<Coffee:0x0055e27e687a98>
+from /home/tupitupi/.rbenv/versions/2.3.1/lib/ruby/gems/2.3.0/gems/activemodel-4.2.7/lib/active_model/attribute_methods.rb:433:in `method_missing'
+[10] pry(main)> r.first
+NoMethodError: undefined method `first' for #<Roastery:0x0055e27cfaf3e8>
+from /home/tupitupi/.rbenv/versions/2.3.1/lib/ruby/gems/2.3.0/gems/activemodel-4.2.7/lib/active_model/attribute_methods.rb:433:in `method_missing'
+[11] pry(main)> r.coffees.first
+  Coffee Load (0.1ms)  SELECT  "coffees".* FROM "coffees" WHERE "coffees"."roastery_id" = ?  ORDER BY "coffees"."id" ASC LIMIT 1  [["roastery_id", 4]]
+=> nil
+[12] pry(main)> r.coffees.create name="Alcoholic Coffee", style:"olut"
+ArgumentError: wrong number of arguments (given 2, expected 0..1)
+from /home/tupitupi/.rbenv/versions/2.3.1/lib/ruby/gems/2.3.0/gems/activerecord-4.2.7/lib/active_record/associations/collection_proxy.rb:289:in `create'
+[13] pry(main)> r.coffees.create name:"Alcoholic Coffee", style:"olut"
+   (0.1ms)  begin transaction
+  SQL (0.2ms)  INSERT INTO "coffees" ("name", "style", "roastery_id", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?)  [["name", "Alcoholic Coffee"], ["style", "olut"], ["roastery_id", 4], ["created_at", "2017-01-25 16:58:06.508381"], ["updated_at", "2017-01-25 16:58:06.508381"]]
+   (11.2ms)  commit transaction
+=> #<Coffee:0x0055e27ed45718
+ id: 9,
+ name: "Alcoholic Coffee",
+ style: "olut",
+ roastery_id: 4,
+ created_at: Wed, 25 Jan 2017 16:58:06 UTC +00:00,
+ updated_at: Wed, 25 Jan 2017 16:58:06 UTC +00:00>
+[14] pry(main)> r.coffees.create name:"Dog Coffee", style:"coffee"
+   (0.1ms)  begin transaction
+  SQL (0.2ms)  INSERT INTO "coffees" ("name", "style", "roastery_id", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?)  [["name", "Dog Coffee"], ["style", "coffee"], ["roastery_id", 4], ["created_at", "2017-01-25 16:58:26.991315"], ["updated_at", "2017-01-25 16:58:26.991315"]]
+   (30.8ms)  commit transaction
+=> #<Coffee:0x0055e27ebb8cd8
+ id: 10,
+ name: "Dog Coffee",
+ style: "coffee",
+ roastery_id: 4,
+ created_at: Wed, 25 Jan 2017 16:58:26 UTC +00:00,
+ updated_at: Wed, 25 Jan 2017 16:58:26 UTC +00:00>
+[15] pry(main)> r.coffees.first.ratings.create score:1
+  Coffee Load (0.1ms)  SELECT  "coffees".* FROM "coffees" WHERE "coffees"."roastery_id" = ?  ORDER BY "coffees"."id" ASC LIMIT 1  [["roastery_id", 4]]
+   (0.1ms)  begin transaction
+  SQL (0.1ms)  INSERT INTO "ratings" ("score", "coffee_id", "created_at", "updated_at") VALUES (?, ?, ?, ?)  [["score", 1], ["coffee_id", 9], ["created_at", "2017-01-25 16:59:50.134634"], ["updated_at", "2017-01-25 16:59:50.134634"]]
+   (25.2ms)  commit transaction
+=> #<Rating:0x0055e27eaab340
+ id: 4,
+ score: 1,
+ coffee_id: 9,
+ created_at: Wed, 25 Jan 2017 16:59:50 UTC +00:00,
+ updated_at: Wed, 25 Jan 2017 16:59:50 UTC +00:00>
+[16] pry(main)> r.coffees.first.ratings.create score:2
+  Coffee Load (0.1ms)  SELECT  "coffees".* FROM "coffees" WHERE "coffees"."roastery_id" = ?  ORDER BY "coffees"."id" ASC LIMIT 1  [["roastery_id", 4]]
+   (0.1ms)  begin transaction
+  SQL (0.1ms)  INSERT INTO "ratings" ("score", "coffee_id", "created_at", "updated_at") VALUES (?, ?, ?, ?)  [["score", 2], ["coffee_id", 9], ["created_at", "2017-01-25 17:00:00.645958"], ["updated_at", "2017-01-25 17:00:00.645958"]]
+   (25.3ms)  commit transaction
+=> #<Rating:0x0055e27e9e6e28
+ id: 5,
+ score: 2,
+ coffee_id: 9,
+ created_at: Wed, 25 Jan 2017 17:00:00 UTC +00:00,
+ updated_at: Wed, 25 Jan 2017 17:00:00 UTC +00:00>
+[17] pry(main)> r.coffees.second.ratings.create score:49
+  Coffee Load (0.4ms)  SELECT  "coffees".* FROM "coffees" WHERE "coffees"."roastery_id" = ?  ORDER BY "coffees"."id" ASC LIMIT 1 OFFSET 1  [["roastery_id", 4]]
+   (0.1ms)  begin transaction
+  SQL (0.2ms)  INSERT INTO "ratings" ("score", "coffee_id", "created_at", "updated_at") VALUES (?, ?, ?, ?)  [["score", 49], ["coffee_id", 10], ["created_at", "2017-01-25 17:00:14.774754"], ["updated_at", "2017-01-25 17:00:14.774754"]]
+   (13.3ms)  commit transaction
+=> #<Rating:0x0055e27e8f5550
+ id: 6,
+ score: 49,
+ coffee_id: 10,
+ created_at: Wed, 25 Jan 2017 17:00:14 UTC +00:00,
+ updated_at: Wed, 25 Jan 2017 17:00:14 UTC +00:00>
+[18] pry(main)> r.coffees.second.ratings.create score:50
+  Coffee Load (0.1ms)  SELECT  "coffees".* FROM "coffees" WHERE "coffees"."roastery_id" = ?  ORDER BY "coffees"."id" ASC LIMIT 1 OFFSET 1  [["roastery_id", 4]]
+   (0.1ms)  begin transaction
+  SQL (0.2ms)  INSERT INTO "ratings" ("score", "coffee_id", "created_at", "updated_at") VALUES (?, ?, ?, ?)  [["score", 50], ["coffee_id", 10], ["created_at", "2017-01-25 17:00:21.425319"], ["updated_at", "2017-01-25 17:00:21.425319"]]
+   (19.3ms)  commit transaction
+=> #<Rating:0x0055e27e8094c0
+ id: 7,
+ score: 50,
+ coffee_id: 10,
+ created_at: Wed, 25 Jan 2017 17:00:21 UTC +00:00,
+ updated_at: Wed, 25 Jan 2017 17:00:21 UTC +00:00>
+[19] pry(main)>
