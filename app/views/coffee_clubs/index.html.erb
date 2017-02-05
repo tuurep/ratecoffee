@@ -1,0 +1,33 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Listing Coffee Clubs</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Founded</th>
+      <th>City</th>
+      <th>String</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @coffee_clubs.each do |coffee_club| %>
+      <tr>
+        <td><%= coffee_club.name %></td>
+        <td><%= coffee_club.founded %></td>
+        <td><%= coffee_club.city %></td>
+        <td><%= coffee_club.string %></td>
+        <td><%= link_to 'Show', coffee_club %></td>
+        <td><%= link_to 'Edit', edit_coffee_club_path(coffee_club) %></td>
+        <td><%= link_to 'Destroy', coffee_club, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Coffee club', new_coffee_club_path %>

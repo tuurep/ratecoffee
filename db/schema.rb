@@ -11,7 +11,16 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170125164645) do
+ActiveRecord::Schema.define(version: 20170205201311) do
+
+  create_table "coffee_clubs", force: :cascade do |t|
+    t.string   "name"
+    t.integer  "founded"
+    t.string   "city"
+    t.string   "string"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
 
   create_table "coffees", force: :cascade do |t|
     t.string   "name"
@@ -21,11 +30,19 @@ ActiveRecord::Schema.define(version: 20170125164645) do
     t.datetime "updated_at",  null: false
   end
 
+  create_table "memberships", force: :cascade do |t|
+    t.integer  "coffee_club_id"
+    t.integer  "user_id"
+    t.datetime "created_at",     null: false
+    t.datetime "updated_at",     null: false
+  end
+
   create_table "ratings", force: :cascade do |t|
     t.integer  "score"
     t.integer  "coffee_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer  "user_id"
   end
 
   create_table "roasteries", force: :cascade do |t|
@@ -33,6 +50,13 @@ ActiveRecord::Schema.define(version: 20170125164645) do
     t.integer  "year"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "users", force: :cascade do |t|
+    t.string   "username"
+    t.datetime "created_at",      null: false
+    t.datetime "updated_at",      null: false
+    t.string   "password_digest"
   end
 
 end

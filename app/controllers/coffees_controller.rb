@@ -33,6 +33,8 @@ class CoffeesController < ApplicationController
         format.html { redirect_to @coffee, notice: 'Coffee was successfully created.' }
         format.json { render :show, status: :created, location: @coffee }
       else
+        @roasteries = Roasteries.all
+        @styles = ["Extra light", "Light", "Medium", "Dark", "Extra dark"]
         format.html { render :new }
         format.json { render json: @coffee.errors, status: :unprocessable_entity }
       end

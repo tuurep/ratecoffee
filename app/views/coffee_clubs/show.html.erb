@@ -1,0 +1,31 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Name:</strong>
+  <%= @coffee_club.name %>
+</p>
+
+<p>
+  <strong>Founded:</strong>
+  <%= @coffee_club.founded %>
+</p>
+
+<p>
+  <strong>City:</strong>
+  <%= @coffee_club.city %>
+</p>
+
+<p>
+  <strong>String:</strong>
+  <%= @coffee_club.string %>
+</p>
+
+<strong>Members</strong>
+<p>
+ <% @coffee_club.users.each do |user| %>
+   <%= link_to user.username, user %>
+ <% end %>
+</p>
+
+<%= link_to 'Edit', edit_coffee_club_path(@coffee_club) %> |
+<%= link_to 'Back', coffee_clubs_path %>

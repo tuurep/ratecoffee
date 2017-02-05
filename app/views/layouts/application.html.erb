@@ -11,6 +11,17 @@
     <%= link_to 'roasteries', roasteries_path %>
     <%= link_to 'coffees', coffees_path %>
     <%= link_to 'ratings', ratings_path %>
+    <%= link_to 'users', users_path %>
+    <%= link_to 'clubs', coffee_clubs_path %> |
+    <% if current_user %>
+      <%= link_to current_user.username, current_user %>
+      <%= link_to 'rate a coffee', new_rating_path %>
+      <%= link_to 'join a club', new_membership_path %>
+      <%= link_to 'sign out', signout_path, method: :delete %>
+    <% else %>
+      <%= link_to 'sign in', signin_path %>
+      <%= link_to 'sign up', signup_path %>
+    <% end %>
   </div>
 
   <%= yield %>

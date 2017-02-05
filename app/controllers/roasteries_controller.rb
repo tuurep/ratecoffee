@@ -74,7 +74,7 @@ class RoasteriesController < ApplicationController
     end
 
     def authenticate
-      admin_accounts = { "admin" => "secret", "tuure" => "tuutti", "emlai" => "zenithmusicpro", "fam95" => "thicc" }
+      admin_accounts = { "admin" => "secret", "tuure" => "tuutti", "emlai" => "zenithmusicpro", "fam95" => "thicc", "juho" => "jkostet" }
 
       authenticate_or_request_with_http_basic do |username, password|
         # Kovakoodataan käyttäjätunnus ja salasana
@@ -82,4 +82,5 @@ class RoasteriesController < ApplicationController
         password == admin_accounts[username]
       end
     end
+
 end

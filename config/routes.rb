@@ -1,10 +1,16 @@
 Rails.application.routes.draw do
+  resources :memberships
+  resources :coffee_clubs
+  resources :users
   resources :coffees
   resources :roasteries
+  resources :ratings, only: [:index, :new, :create, :destroy]
+  resource :session, only: [:new, :create, :destroy]
 
   root 'roasteries#index'
-
-  resources :ratings, only: [:index, :new, :create, :destroy]
+  get 'signin', to: 'sessions#new'
+  get 'signup', to: 'users#new'
+  delete 'signout', to: 'sessions#destroy'
 
   # Not needed because of REST
   #get 'ratings', to: 'ratings#index'
