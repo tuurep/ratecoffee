@@ -69,6 +69,6 @@ class CoffeeClubsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def coffee_club_params
-      params.require(:coffee_club).permit(:name, :founded, :city, :string)
+      params.require(:coffee_club).permit(:name, :founded, :city)
     end
 end

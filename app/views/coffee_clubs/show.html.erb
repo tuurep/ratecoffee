@@ -15,17 +15,17 @@
   <%= @coffee_club.city %>
 </p>
 
-<p>
-  <strong>String:</strong>
-  <%= @coffee_club.string %>
-</p>
-
-<strong>Members</strong>
-<p>
- <% @coffee_club.users.each do |user| %>
-   <%= link_to user.username, user %>
- <% end %>
-</p>
+<% if @coffee_club.members.any? %>
+  <ul>
+    <% @coffee_club.members.each do |member| %>
+      <li>
+        <%= link_to member.username, member %>
+      </li>
+    <% end %>
+  </ul>
+<% else %>
+  <p>no members</p>
+<% end %>
 
 <%= link_to 'Edit', edit_coffee_club_path(@coffee_club) %> |
 <%= link_to 'Back', coffee_clubs_path %>

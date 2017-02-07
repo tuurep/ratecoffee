@@ -4,10 +4,8 @@ one:
   name: MyString
   founded: 1
   city: MyString
-  string: MyString
 
 two:
   name: MyString
   founded: 1
   city: MyString
-  string: MyString

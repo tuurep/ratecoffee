@@ -19,15 +19,20 @@
   <% end %>
 </ul>
 
-<strong> Member of </strong>
-<p>
- <% @user.coffee_clubs.each do |coffee_club| %>
-   <%= link_to coffee_club.name, coffee_club %>
- <% end %>
-</p>
+<% if @user.coffee_clubs.any? %>
+
+  <p>member of
+  <% @user.coffee_clubs.each do |club| %>
+    <%= link_to club.name, club%>
+  <% end %>
+  </p>
+<% else %>
+  <p>no coffeeclub memberships</p>
+<% end %>
+
 
 <% if @user == current_user %>
-  <%= link_to 'Edit', edit_user_path(@user) %>
-  <%= link_to 'Destroy', user, method: :delete, data: { confirm: 'Are you sure?' } %> |
+  <%= link_to 'Change password', edit_user_path(@user) %>
+  <%= link_to 'Destroy', @user, method: :delete, data: { confirm: 'Are you sure?' } %> |
 <% end %>
 <%= link_to 'Back', users_path %>

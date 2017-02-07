@@ -4,7 +4,6 @@ class CreateCoffeeClubs < ActiveRecord::Migration
       t.string :name
       t.integer :founded
       t.string :city
-      t.string :string
 
       t.timestamps null: false
     end

@@ -1,6 +1,8 @@
 Rails.application.routes.draw do
   resources :memberships
   resources :coffee_clubs
+  resources :memberships
+  resources :coffee_clubs
   resources :users
   resources :coffees
   resources :roasteries
