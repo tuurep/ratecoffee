@@ -1,7 +1,6 @@
 class RoasteriesController < ApplicationController
   before_action :set_roastery, only: [:show, :edit, :update, :destroy]
-  before_filter :authenticate, only: [:destroy]
-
+  before_action :ensure_that_signed_in, except: [:index, :show]
   # GET /roasteries
   # GET /roasteries.json
   def index
@@ -71,16 +70,6 @@ class RoasteriesController < ApplicationController
     # Never trust parameters from the scary internet, only allow the white list through.
     def roastery_params
       params.require(:roastery).permit(:name, :year)
-    end
-
-    def authenticate
-      admin_accounts = { "admin" => "secret", "tuure" => "tuutti", "emlai" => "666", "fam95" => "thicc", "juho" => "jkostet" }
-
-      authenticate_or_request_with_http_basic do |username, password|
-        # Kovakoodataan käyttäjätunnus ja salasana
-        # username == "admin" and password == "secret"
-        password == admin_accounts[username]
-      end
     end
 
 end

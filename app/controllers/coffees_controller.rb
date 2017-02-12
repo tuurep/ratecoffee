@@ -1,6 +1,7 @@
 class CoffeesController < ApplicationController
   before_action :set_coffee, only: [:show, :edit, :update, :destroy]
   before_action :set_roasteries_and_styles_for_template, only: [:new, :edit, :create]
+  before_action :ensure_that_signed_in, except: [:index, :show]
   # GET /coffees
   # GET /coffees.json
   def index
