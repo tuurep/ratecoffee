@@ -1,6 +1,6 @@
 class CoffeesController < ApplicationController
   before_action :set_coffee, only: [:show, :edit, :update, :destroy]
-
+  before_action :set_roasteries_and_styles_for_template, only: [:new, :edit, :create]
   # GET /coffees
   # GET /coffees.json
   def index
@@ -15,8 +15,6 @@ class CoffeesController < ApplicationController
   # GET /coffees/new
   def new
     @coffee = Coffee.new
-    @roasteries = Roastery.all
-    @styles = ["Extra light", "Light", "Medium", "Dark", "Extra dark"]
   end
 
   # GET /coffees/1/edit
@@ -33,14 +31,10 @@ class CoffeesController < ApplicationController
         format.html { redirect_to @coffee, notice: 'Coffee was successfully created.' }
         format.json { render :show, status: :created, location: @coffee }
       else
-        @roasteries = Roasteries.all
-        @styles = ["Extra light", "Light", "Medium", "Dark", "Extra dark"]
         format.html { render :new }
         format.json { render json: @coffee.errors, status: :unprocessable_entity }
       end
     end
-
-    redirect_to coffees_path
   end
 
   # PATCH/PUT /coffees/1
@@ -65,6 +59,11 @@ class CoffeesController < ApplicationController
       format.html { redirect_to coffees_url, notice: 'Coffee was successfully destroyed.' }
       format.json { head :no_content }
     end
+  end
+
+  def set_roasteries_and_styles_for_template
+    @roasteries = Roastery.all
+    @styles = ["Extra light", "Light", "Medium", "Dark", "Extra dark"]
   end
 
   private
