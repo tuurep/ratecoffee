@@ -6,7 +6,13 @@ group :test do
   gem 'factory_girl_rails'
   gem 'capybara'
   gem 'launchy'
+  gem 'simplecov', require: false # testikattavuus
 end
+
+# its-sanan käyttö Rspec 3:ssa vaatii gemin
+gem 'rspec-its'
+
+
 
 ruby '2.3.1'
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'

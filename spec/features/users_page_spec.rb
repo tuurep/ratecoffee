@@ -4,11 +4,7 @@ include Helpers
 
 describe "User" do
   let(:coffee){ FactoryGirl.create(:coffee) }
-  let(:user){ FactoryGirl.create(:user, username:"Kokkilokki") }
-
-  before :each do
-    FactoryGirl.create :user
-  end
+  let!(:user){ FactoryGirl.create(:user) }
 
   it "when signed up with good credentials, is added to the system" do
     visit signup_path
@@ -22,7 +18,15 @@ describe "User" do
   end
 
   it "when deletes own rating, rating is removed from system" do
+    sign_in(username:"Pekka", password:"Foobar1")
+    user.ratings << FactoryGirl.create(:rating, coffee: coffee)
+    user.ratings << FactoryGirl.create(:rating2, coffee: coffee)
 
+    visit user_path(user)
+
+    page.all('a', :text => 'delete')[1].click
+
+    expect(user.ratings.count).to eq(1)
   end
 
   it "has a page which shows ratings of user" do
