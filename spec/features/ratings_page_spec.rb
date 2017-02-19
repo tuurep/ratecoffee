@@ -26,35 +26,20 @@ describe "Rating" do
     expect(coffee1.average_rating).to eq(15.0)
   end
 
-end
-
-describe "Ratings page" do
-
-  it "should not have any before been created" do
-    visit ratings_path
-    expect(page).to have_content 'List of ratings'
-    expect(page).to have_content 'Number of ratings: 0'
-  end
-
-  describe "when ratings exists" do
-    let!(:user) { FactoryGirl.create :user }
-    let!(:roastery) { FactoryGirl.create :roastery, name:"Paulig" }
-    let!(:coffee) { FactoryGirl.create :coffee, name:"iso kuppi", roastery:roastery }
-
+  describe "when several exist" do
     before :each do
-      @ratings = [10, 20, 30]
-      @ratings.each do |score|
-        FactoryGirl.create(:rating, user: user, score: score, coffee: coffee)
-      end
-
+      create_coffees_with_ratings(FactoryGirl.create(:roastery), "hell", user, 10, 7, 9)
       visit ratings_path
     end
 
-    it "lists the ratings and their total number" do
-      expect(page).to have_content "Number of ratings: #{@ratings.count}"
-      @ratings.each do |score|
-        expect(page).to have_content score
-      end
+    it "all are shown at ratings page" do
+      expect(page).to have_content "Kahvi 10 #{user.username}"
+      expect(page).to have_content "Kahvi 7 #{user.username}"
+      expect(page).to have_content "Kahvi 9 #{user.username}"
+    end
+
+    it "their count is shown at ratings page" do
+      expect(page).to have_content "Number of ratings: #{Rating.count}"
     end
 
   end

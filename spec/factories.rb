@@ -12,6 +12,7 @@ FactoryGirl.define do
 
   factory :coffee do
     name "Kahvi"
+    roastery
     style "Extra Dark"
   end
 

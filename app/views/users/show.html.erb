@@ -7,17 +7,24 @@
   <p> average <%= @user.average_rating %> </p>
 <% end %>
 
-<h2> ratings </h2>
-<ul>
-  <% @user.ratings.each do |rating| %>
-    <li>
-      <%= rating %>
-      <% if @user == current_user %>
-        <%= link_to 'delete', rating, method: :delete, data: { confirm: 'Are you sure?' } %>
-      <% end %>
-    </li>
-  <% end %>
-</ul>
+<% if @user.ratings.any? %>
+  <p> Favorite coffee: <%= @user.favorite_coffee.name %> </p>
+  <p> Favorite roastery: <%= @user.favorite_roastery.name %> </p>
+  <p> Favorite style: <%= @user.favorite_style %> </p>
+
+  <h2> ratings </h2>
+  <ul>
+    <% @user.ratings.each do |rating| %>
+      <li>
+        <%= rating %>
+        <% if @user == current_user %>
+          <%= link_to 'delete', rating, method: :delete, data: { confirm: 'Are you sure?' } %>
+        <% end %>
+      </li>
+    <% end %>
+  </ul>
+
+<% end %>
 
 <% if @user.coffee_clubs.any? %>
 

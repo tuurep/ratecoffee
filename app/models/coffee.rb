@@ -1,11 +1,11 @@
 class Coffee < ActiveRecord::Base
+  include RatingAverage
+
   belongs_to :roastery
   has_many :ratings, dependent: :destroy
   has_many :raters, through: :ratings, source: :user
   validates :name, length: { minimum: 1 }
   validates :style, length: { minimum: 1 }
-
-  include RatingAverage
 
   def to_s
     self.name + " by " + self.roastery.name
