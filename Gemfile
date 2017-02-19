@@ -12,7 +12,8 @@ end
 # its-sanan käyttö Rspec 3:ssa vaatii gemin
 gem 'rspec-its'
 
-
+# Paras tapa HTTP-kutsujen tekoon Rubyllä
+gem 'httparty'
 
 ruby '2.3.1'
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'

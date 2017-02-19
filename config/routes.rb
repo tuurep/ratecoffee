@@ -13,6 +13,9 @@ Rails.application.routes.draw do
   get 'signin', to: 'sessions#new'
   get 'signup', to: 'users#new'
   delete 'signout', to: 'sessions#destroy'
+  # for Google Places API
+  get 'places', to: 'places#index'
+  post 'places', to:'places#search'
 
   # Not needed because of REST
   #get 'ratings', to: 'ratings#index'
