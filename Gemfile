@@ -7,6 +7,7 @@ group :test do
   gem 'capybara'
   gem 'launchy'
   gem 'simplecov', require: false # testikattavuus
+  gem 'webmock'
 end
 
 # its-sanan käyttö Rspec 3:ssa vaatii gemin

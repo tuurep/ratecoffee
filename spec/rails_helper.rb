@@ -1,3 +1,4 @@
+require 'webmock/rspec'
 # Testikattavuus
 require 'simplecov'
 SimpleCov.start('rails')
