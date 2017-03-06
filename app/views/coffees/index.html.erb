@@ -2,7 +2,7 @@
 
 <h1>Listing coffees</h1>
 
-<table>
+<table class="table table-hover">
   <thead>
     <tr>
       <th>Name</th>
@@ -18,8 +18,8 @@
         <td><%= link_to coffee.name, coffee %></td>
         <td><%= coffee.style %></td>
         <td><%= coffee.roastery.name  %></td>
-        <td><%= link_to 'Edit', edit_coffee_path(coffee) %></td>
-        <td><%= link_to 'Destroy', coffee, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><%= link_to 'Edit', edit_coffee_path(coffee), class:'btn btn-primary' %></td>
+        <td><%= link_to 'Destroy', coffee, method: :delete, data: { confirm: 'Are you sure?' }, class:'btn btn-danger' %></td>
       </tr>
     <% end %>
   </tbody>

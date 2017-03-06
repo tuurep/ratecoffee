@@ -1,27 +1,18 @@
 <p id="notice"><%= notice %></p>
 
-<h1>Listing roasteries</h1>
-<p> Number of roasteries: <%= @roasteries.count %> </p>
-<table>
-  <thead>
-    <tr>
-      <th>Name</th>
-      <th>Year</th>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
+<h1>Roasteries</h1>
 
-  <tbody>
-    <% @roasteries.each do |roastery| %>
-      <tr>
-        <td><%= link_to roastery.name, roastery %></td>
-        <td><%= roastery.year %></td>
-        <td><%= link_to 'Edit', edit_roastery_path(roastery) %></td>
-        <td><%= link_to 'Destroy', roastery, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
+<h2>Active</h2>
+
+<p> Number of active roasteries: <%= @active_roasteries.count %> </p>
+
+<%= render 'list', roasteries: @active_roasteries %>
+
+<h2>Retired</h2>
+
+<p> Number of retired roasteries: <%= @retired_roasteries.count %> </p>
+
+<%= render 'list', roasteries: @retired_roasteries %>
 
 <br>
 

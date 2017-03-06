@@ -1,5 +1,10 @@
 source 'https://rubygems.org'
 
+gem 'bootstrap-sass'
+group :development do
+  gem 'rails_layout'
+end
+
 # factory girl testien alustamiseen
 # capybara selaintason testaamiseen
 group :test do

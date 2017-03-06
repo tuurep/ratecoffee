@@ -2,7 +2,7 @@
 
 <h1>Listing Coffee Clubs</h1>
 
-<table>
+<table class="table table-hover">
   <thead>
     <tr>
       <th>Name</th>
@@ -18,9 +18,9 @@
         <td><%= coffee_club.name %></td>
         <td><%= coffee_club.founded %></td>
         <td><%= coffee_club.city %></td>
-        <td><%= link_to 'Show', coffee_club %></td>
-        <td><%= link_to 'Edit', edit_coffee_club_path(coffee_club) %></td>
-        <td><%= link_to 'Destroy', coffee_club, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><%= link_to 'Show', coffee_club, class:'btn btn-primary' %></td>
+        <td><%= link_to 'Edit', edit_coffee_club_path(coffee_club), class:'btn btn-primary' %></td>
+        <td><%= link_to 'Destroy', coffee_club, method: :delete, data: { confirm: 'Are you sure?' }, class:'btn btn-danger' %></td>
       </tr>
     <% end %>
   </tbody>
@@ -28,4 +28,4 @@
 
 <br>
 
-<%= link_to 'New Coffee club', new_coffee_club_path %>
+<%= link_to 'New Coffee club', new_coffee_club_path, class:'btn btn-primary' %>

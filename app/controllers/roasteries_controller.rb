@@ -4,7 +4,8 @@ class RoasteriesController < ApplicationController
   # GET /roasteries
   # GET /roasteries.json
   def index
-    @roasteries = Roastery.all
+    @active_roasteries = Roastery.active
+    @retired_roasteries = Roastery.retired
   end
 
   # GET /roasteries/1
@@ -69,7 +70,7 @@ class RoasteriesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def roastery_params
-      params.require(:roastery).permit(:name, :year)
+      params.require(:roastery).permit(:name, :year, :active)
     end
 
 end
