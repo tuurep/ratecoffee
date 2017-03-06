@@ -5,6 +5,10 @@ class PlacesController < ApplicationController
   def index
   end
 
+  def show
+    @place = CoffeemappingApi.place_details(params[:id])
+  end
+
   def search
     @places = CoffeemappingApi.places_in(params[:city])
     if @places.empty?

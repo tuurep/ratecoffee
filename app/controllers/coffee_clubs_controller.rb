@@ -10,6 +10,12 @@ class CoffeeClubsController < ApplicationController
   # GET /coffee_clubs/1
   # GET /coffee_clubs/1.json
   def show
+    if current_user.is_member_of? @coffee_club
+      @membership = current_user.memberships.find{ |m| m.coffee_club == @coffee_club }
+    else
+      @membership = Membership.new
+      @membership.coffee_club = @coffee_club
+    end
   end
 
   # GET /coffee_clubs/new

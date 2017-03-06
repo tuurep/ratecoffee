@@ -27,5 +27,19 @@
   <p>no members</p>
 <% end %>
 
-<%= link_to 'Edit', edit_coffee_club_path(@coffee_club) %> |
-<%= link_to 'Back', coffee_clubs_path %>
+<% if current_user %>
+  <% if current_user.is_member_of? @coffee_club %>
+    <%= form_for(@membership, method: "delete") do |f| %>
+      <%= f.hidden_field :coffee_club_id %>
+      <%= f.submit value: "end the membership" %>
+    <% end %>
+  <% else %>
+    <%= form_for(@membership) do |f| %>
+      <%= f.hidden_field :coffee_club_id %>
+      <%= f.submit value:"join the club" %>
+    <% end %>
+  <% end %>
+
+  <%= link_to 'Edit', edit_coffee_club_path(@coffee_club) %>
+  <%= link_to 'Destroy', @coffee_club, method: :delete, data: { confirm: 'Are you sure?' } %>
+<% end %>

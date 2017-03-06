@@ -1,23 +1,27 @@
 <p id="notice"><%= notice %></p>
 
-<p>
-  <strong>Name:</strong>
-  <%= @coffee.name %>
-</p>
+<h2> <%= @beer %> </h2>
 
 <p>
   <strong>Style:</strong>
   <%= @coffee.style %>
 </p>
 
-<p>
-  <strong>Roastery:</strong>
-  <%= @coffee.roastery.name %>
-</p>
 <% if @coffee.ratings.empty? %>
-  <p>Coffee has not yet been rated</p>
+  <p>coffee has not yet been rated!</p>
 <% else %>
-  <p> Has <%= pluralize(@coffee.ratings.count, 'rating') %>, average <%= @coffee.average_rating %></p>
+  Has <%= pluralize(@coffee.ratings.count, 'rating') %>, average score <%= @coffee.average_rating %></p>
 <% end %>
-<%= link_to 'Edit', edit_coffee_path(@coffee) %> |
-<%= link_to 'Back', coffees_path %>
+
+<% if current_user %>
+  <h4>give a rating:</h4>
+
+  <%= form_for(@rating) do |f| %>
+    <%= f.hidden_field :coffee_id %>
+    score: <%= f.number_field :score %>
+    <%= f.submit %>
+  <% end %>
+
+  <%= link_to 'Edit', edit_coffee_path(@coffee) %> |
+  <%= link_to 'Destroy', @coffee, method: :delete, data: { confirm: 'Are you sure?' } %>
+<% end %>

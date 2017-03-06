@@ -7,6 +7,7 @@ Rails.application.routes.draw do
   resources :coffees
   resources :roasteries
   resources :ratings, only: [:index, :new, :create, :destroy]
+  resources :places, only:[:index, :show]
   resource :session, only: [:new, :create, :destroy]
 
   root 'roasteries#index'
@@ -14,7 +15,6 @@ Rails.application.routes.draw do
   get 'signup', to: 'users#new'
   delete 'signout', to: 'sessions#destroy'
   # for Google Places API
-  get 'places', to: 'places#index'
   post 'places', to:'places#search'
 
   # Not needed because of REST

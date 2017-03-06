@@ -1,5 +1,6 @@
 class CoffeemappingApi
   def self.places_in(city)
+
     city = city.downcase
     Rails.cache.fetch(city) { fetch_places_in(city) }
   end
@@ -18,6 +19,16 @@ class CoffeemappingApi
     places.map do | place |
       Place.new(place)
     end
+  end
+
+  def self.place_details(place_id)
+    Rails.cache.fetch(place_id, expires_in: 1.hour) { fetch_place_details(place_id) }
+  end
+
+  def self.fetch_place_details(place_id)
+    url = "https://maps.googleapis.com/maps/api/place/details/json?key=#{key}&placeid="
+    response = HTTParty.get "#{url}#{place_id}"
+    Place.new(response["result"])
   end
 
   def self.key
